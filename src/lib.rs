@@ -43,14 +43,9 @@ pub enum ScriptType {
 
 pub fn classify_script(script: &[u8]) -> ScriptType {
     // TODO: Match script pattern and return corresponding ScriptType
-    // P2PKH: 76 a9 14 [20 bytes] 88 ac (25 bytes total)
     match script {
         [0x76, 0xa9, 0x14] => ScriptType::P2PKH,
-
-        // P2WPKH: 00 14 [20 bytes] (22 bytes total)
         [0x00, 0x14, 0xff] => ScriptType::P2WPKH,
-
-        // Tout autre pattern
         _ => ScriptType::Unknown,
     }
 }
