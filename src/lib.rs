@@ -13,7 +13,7 @@ pub fn to_big_endian(bytes: &[u8]) -> Vec<u8> {
 pub fn bytes_to_hex(bytes: &[u8]) -> String {
     // TODO: Implement conversion of bytes slice to hex string
     //encode(bytes)
-    bytes.iter().map(|f| encode(f)).collect()
+    bytes.iter().map(|f| hex::encode(f)).collect()
 }
 
 pub fn hex_to_bytes(hex: &str) -> Result<Vec<u8>, hex::FromHexError> {
@@ -61,8 +61,6 @@ pub struct Outpoint(pub String, pub u32);
 
 pub fn read_pushdata(script: &[u8]) -> &[u8] {
     // TODO: Return the pushdata portion of the script slice (assumes pushdata starts at index 2)
-    // Version simple : assume que les données commencent à l'index 2
-    // (après opcode + longueur)
     if script.len() <= 2 {
         return &[];
     }
